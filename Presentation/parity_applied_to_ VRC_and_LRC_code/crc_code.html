@@ -1,0 +1,103 @@
+<section data-auto-animate>
+    <h1 class="r-fit-text" style="color: rgb(113, 115, 60);">Cyclic Redundancy Check</h1>
+</section>
+
+<!-- Diapositiva 2: Descripción del CRC -->
+<section data-auto-animate>
+    <h1 style="color: rgb(113, 115, 60); font-size: 80px;">Cyclic Redundancy Check</h1>
+    <p style="color: rgb(73, 72, 71);">El código <strong>CRC</strong> se basa en ciertas propiedades matemáticas que satisface el cociente entre polinomios.</p>
+</section>
+
+<!-- Diapositiva 3: Mecanismo del CRC -->
+<section data-auto-animate>
+    <h1 style="font-size: 80px;color: rgb(113, 115, 60);">Cyclic Redundancy Check</h1>
+    <p style="color: rgb(73, 72, 71);">Agregar al patrón de bits que compone el mensaje un conjunto de bits adicionales, de manera que el patrón resultante (considerado como un polinomio binario) sea divisible de manera exacta por un polinomio denominado <strong>polinomio generador</strong>.</p>
+</section>
+
+<section data-auto-animate>
+    <h1 class="r-fit-text" style="color: rgb(113, 115, 60);">Cyclic Redundancy Check </h1>
+    <p  style="color: rgb(73, 72, 71);"><b>Funcionamiento</b></p>
+</section>
+
+<!-- Diapositiva 3: Concepto básico -->
+
+<!-- Diapositiva 4: Paso 1: Selección del Polinomio Generador -->
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 1: Selección del Polinomio Generador</h2>
+    <p style="color: rgb(73, 72, 71);">El primer paso es seleccionar un polinomio generador, que será usado en la división polinómica. Ejemplo común: <code>1101</code>.</p>
+</section>
+
+<!-- Diapositiva 5: Paso 2: Expansión del Mensaje -->
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 2: Expansión del Mensaje</h2>
+    <p style="color: rgb(73, 72, 71);">Agrega ceros al final del mensaje en la misma longitud del polinomio generador menos uno.</p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li>Ejemplo: Si el mensaje original es <code>1001</code> y el polinomio generador es de longitud 4, añade 3 ceros: <code>1001000</code>.</li>
+    </ul>
+</section>
+
+<!-- Diapositiva 6: Paso 3: División Binaria -->
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 3: División Binaria</h2>
+    <p style="color: rgb(73, 72, 71);">Realiza una división binaria entre el mensaje expandido y el polinomio generador.</p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li>Continúa el proceso hasta que el residuo tenga menos bits que el polinomio generador.</li>
+    </ul>
+</section>
+
+<!-- Diapositiva 7: Paso 4: Obtención del Residuo -->
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 4: Obtención del Residuo</h2>
+    <p style="color: rgb(73, 72, 71);">El residuo obtenido al final de la división binaria se convierte en el código de CRC.</p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li>Ejemplo: Si el residuo es <code>101</code>, este será el CRC.</li>
+    </ul>
+</section>
+
+<!-- Diapositiva 8: Paso 5: Añadir el CRC al Mensaje -->
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 5: Añadir el CRC al Mensaje</h2>
+    <p style="color: rgb(73, 72, 71);">El residuo (CRC) se agrega al final del mensaje original antes de enviarlo.</p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li>Mensaje transmitido = Mensaje original + CRC</li>
+    </ul>
+</section>
+
+<!-- Diapositiva 9: Verificación en el Receptor -->
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Verificación en el Receptor</h2>
+    <p style="color: rgb(73, 72, 71);">El receptor realiza la misma división binaria sobre el mensaje recibido (mensaje + CRC). Si el residuo es cero, el mensaje está intacto.</p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li>Residuo = 0 → Mensaje sin errores</li>
+        <li>Residuo ≠ 0 → Mensaje con errores</li>
+    </ul>
+</section>
+
+<section data-auto-animate>
+    <h1 style="color: rgb(113, 115, 60); font-size: 80px;">Roles del CRC</h1>
+    <p style="color: rgb(73, 72, 71);">El algoritmo <strong>CRC</strong> cumple dos roles:</p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li>Permite determinar los bits que se deben agregar al mensaje original.</li>
+        <li>Permite verificar si el mensaje recibido contiene o no errores.</li>
+    </ul>
+    <p style="color: rgb(73, 72, 71);"> El receptor puede ir dividiendo el mensaje a medida que recibe los bits:</p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li>No es necesario recibir el mensaje completo para comenzar a verificar el <strong>CRC</strong>.</li>
+        <li>Los errores de ráfaga de una longitud igual o menor al grado del polinomio, <b>SERÁN SIEMPRE DETECTADOS</b></li>
+    </ul>
+</section>
+
+<section data-auto-animate>
+    <h1 style="color: rgb(113, 115, 60); font-size: 70px;">Polinomios Generadores en CRC</h1>
+    <p style="color: rgb(73, 72, 71);">El polinomio generador a ser usado <strong>debe ser elegido con cuidado</strong>, ya que la capacidad de detección de errores dependerá de sus características.</p>
+    <p style="color: rgb(73, 72, 71);"><strong>Existen varios polinomios actualmente en uso:</strong></p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li><strong>CRC-4-ITU:</strong> \( x^4 + x + 1 \)</li>
+        <hr>
+        <li><strong>CRC-16-IBM:</strong> \( x^{16} + x^{15} + x^2 + 1 \)</li>
+        <hr>
+        <li><strong>CRC-CCITT:</strong> \( x^{16} + x^{12} + x^5 + 1 \)</li>
+        <hr>
+        <li><strong>CRC-32:</strong> \( x^{32} + x^{26} + x^{23} + x^{22} + x^{16} + x^{12} + x^{11} + x^{10} + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1 \)</li>
+    </ul>
+</section>

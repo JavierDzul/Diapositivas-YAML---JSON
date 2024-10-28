@@ -1,0 +1,56 @@
+<section data-auto-animate>
+    <div style="display: flex; flex-direction: column;">
+    
+        <div>
+            <h1 style="font-size: 120px; color: rgb(113, 115, 60);">
+                Se puede asumir que ....
+            </h1>
+    
+            <p style="color: rgb(73, 72, 71); text-align: center;" >
+                Siempre que se produzca una cantidad de errores menor a la distancia mínima, <span style=" color: green;"><b>SERÁ DETECTADO</b></span>
+            </p>
+            <p style="color: rgb(73, 72, 71); text-align: center;" >
+                Si se produce un cantidad igual o mayor a la distanica mínima, <span style=" color: red;"><b>NO SERÁ SIEMPRE DETECTADO</b></span>
+            </p>
+
+            <p style="color: rgb(73, 72, 71); text-align: center;" >
+                Con el mismo contexto podemos ver que 3 errores convierten a <b>A</b> en:
+            </p>
+
+
+            <div style="display: flex; justify-content: space-around; flex-direction: row;">
+
+                <div style="display: flex; flex-direction: column;">
+                        Patrón Válido
+                    <ul style="list-style-type: upper-alpha;">
+                        <li>
+                            0 0 0 0 0
+                        </li>
+                        <li>
+                            1 1 1 0 0
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                        Patrón Inválido
+                    
+                    <ul style="list-style-type: upper-alpha;">
+                        <li>
+                            0 0 0 0 0
+                        </li>
+                        <p style="margin-top: -3px;">
+                            1 1 0 0 1
+                        </p>
+                    </ul>
+                    
+                </div>
+
+            </div>
+
+
+        </div>
+
+        
+    </div>
+</section>

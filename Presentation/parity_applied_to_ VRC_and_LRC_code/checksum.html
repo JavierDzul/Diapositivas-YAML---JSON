@@ -1,0 +1,35 @@
+<section data-auto-animate>
+    <h1 class="r-fit-text" style="color: rgb(113, 115, 60);">Checksum</h1>
+</section>
+
+
+<section data-auto-animate>
+    <h1 style="color: rgb(113, 115, 60); font-size: 70px;">Checksum</h1>
+    <p style="color: rgb(73, 72, 71);">El <strong>checksum</strong> (suma de comprobación) es un mecanismo relativamente sencillo para verificar la integridad de un mensaje.</p>
+    <ul style="color: rgb(113, 115, 60);">
+        <li>La idea central consiste en ir sumando segmentos de datos de <i>n</i> bits en complemento a 1 de forma que la longitud de la suma sea también <i>n</i> bits, para luego complementar ese total obtenido antes de anexarlo al bloque de datos.</li>
+    </ul>
+</section>
+
+<section data-auto-animate>
+    <h1 style="color: rgb(113, 115, 60); font-size: 70px;">Checksum</h1>
+    <img class="r-stretch r-frame" src="assets\images\checksum.png" alt="">
+</section>
+
+<section data-auto-animate>
+    <h1 style="color: rgb(113, 115, 60); font-size: 60px;">Ejemplo de Cálculo de Checksum</h1>
+    <p style="color: rgb(73, 72, 71);">Cálculo de checksum para datos en segmentos de 4 bits:</p>
+    <ol style="color: rgb(113, 115, 60); font-size: 24px;">
+        <li><strong>Datos:</strong> <code>1011 0011 1101</code></li>
+        <li><strong>Paso 1:</strong> Dividimos en segmentos de 4 bits: <code>1011</code>, <code>0011</code>, <code>1101</code></li>
+        <li><strong>Paso 2:</strong> Sumamos los segmentos:
+            <ul>
+                <li><code>1011 + 0011 = 1110</code></li>
+                <li><code>1110 + 1101 = 11011</code> (descartamos el bit más alto)</li>
+                <li>Resultado: <code>1011</code></li>
+            </ul>
+        </li>
+        <li><strong>Paso 3:</strong> Complemento a 1 de <code>1011</code> es <code>0100</code></li>
+        <li><strong>Checksum final:</strong> <code>0100</code></li>
+    </ol>
+</section>
