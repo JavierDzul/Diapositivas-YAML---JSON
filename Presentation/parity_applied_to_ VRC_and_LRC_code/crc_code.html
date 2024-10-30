@@ -24,31 +24,189 @@
 <!-- Diapositiva 4: Paso 1: Selección del Polinomio Generador -->
 <section data-auto-animate>
     <h2 style="color: rgb(113, 115, 60);">Paso 1: Selección del Polinomio Generador</h2>
-    <p style="color: rgb(73, 72, 71);">El primer paso es seleccionar un polinomio generador, que será usado en la división polinómica. Ejemplo común: <code>1101</code>.</p>
+    <p style="color: rgb(73, 72, 71);">El primer paso es seleccionar un polinomio generador, que será usado en la división polinómica. <br> Ejemplo sencillo: <b>1 1 0 1</b>.</p>
+    <div class="fragment">
+        <hr>
+        <p style="color: rgb(113, 115, 60);">\[ x^3 + x^2 + 1 = 1 1 0 1 \]</p>
+        <hr>
+    </div>
+    
 </section>
+
+
 
 <!-- Diapositiva 5: Paso 2: Expansión del Mensaje -->
 <section data-auto-animate>
     <h2 style="color: rgb(113, 115, 60);">Paso 2: Expansión del Mensaje</h2>
     <p style="color: rgb(73, 72, 71);">Agrega ceros al final del mensaje en la misma longitud del polinomio generador menos uno.</p>
     <ul style="color: rgb(113, 115, 60);">
-        <li>Ejemplo: Si el mensaje original es <code>1001</code> y el polinomio generador es de longitud 4, añade 3 ceros: <code>1001000</code>.</li>
+        <li>Ejemplo: Si el mensaje original es <code>1001</code> y el polinomio generador es <b>1101</b>, añade 3 ceros: <code>1001000</code>.</li>
     </ul>
 </section>
 
 <!-- Diapositiva 6: Paso 3: División Binaria -->
 <section data-auto-animate>
-    <h2 style="color: rgb(113, 115, 60);">Paso 3: División Binaria</h2>
-    <p style="color: rgb(73, 72, 71);">Realiza una división binaria entre el mensaje expandido y el polinomio generador.</p>
+    <h2 style="color: rgb(113, 115, 60);">Paso 3: Ejecución</h2>
+    <p style="color: rgb(73, 72, 71);">Realiza una operacion XOR entre el mensaje expandido y el polinomio generador.</p>
     <ul style="color: rgb(113, 115, 60);">
         <li>Continúa el proceso hasta que el residuo tenga menos bits que el polinomio generador.</li>
     </ul>
 </section>
 
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 3: Ejecución</h2>
+    
+    <div data-id="1">
+        <p data-id="paso1" style="color: rgb(73, 72, 71);"><strong>Paso 1:</strong> Alineación de los bits</p>
+<p data-id="n1" style="color: rgb(113, 115, 60);">\[
+M = 1001\underline{000}
+\]
+\[
+p = \phantom{10}1101
+\]</p>
+    </div>
+    
+</section>
+
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 3: Ejecución</h2>
+    <div style="display: flex;">
+
+        <div  style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
+            
+    <p  style="color: rgb(73, 72, 71);"><strong>Paso 1:</strong> Alineación de los bits</p>
+<p  style="color: rgb(113, 115, 60); text-align: center;">\[
+M = \underline{1001}000
+\]
+\[
+p = \phantom{10}1101
+\]</p>
+        </div>
+
+        <div>
+        <p style="color: rgb(73, 72, 71);"><strong>Paso 2:</strong> Operación XOR (bit a bit)</p>
+            <p style="color: rgb(113, 115, 60);">
+            \[
+            1 \oplus 1 = 0
+            \]
+            \[
+            0 \oplus 1 = 1
+            \]
+            \[
+            0 \oplus 0 = 0
+            \]
+            \[
+            1 \oplus 1 = 0
+            \]
+        </p>
+        </div>
+
+    </div>
+
+
+
+    
+</section>
+
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 3: Ejecución</h2>
+    <div style="display: flex;">
+
+        <div  style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
+            
+    <p  style="color: rgb(73, 72, 71);"><strong>Paso 4:</strong> Segunda iteración</p>
+<p  style="color: rgb(113, 115, 60); text-align: center;">\[
+    M = 1001\underline {0}00
+    
+\]
+\[Resuido = \underline{100}\]
+\[  Valor = \underline{1000}\]
+\[
+p = \phantom{10}1101
+\]</p>
+        </div>
+
+        <div>
+        <p style="color: rgb(73, 72, 71);"><strong>Paso 5:</strong> Segunda Operación XOR (bit a bit)</p>
+            <p style="color: rgb(113, 115, 60);">
+            \[
+            0 \oplus 1 = 1
+            \]
+            \[
+            1 \oplus 1 = 0
+            \]
+            \[
+            0 \oplus 0 = 0
+            \]
+            \[
+            0 \oplus 1 = 1
+            \]
+        </p>
+        </div>
+
+    </div>
+
+
+    
+</section>
+
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 3: Ejecución</h2>
+    <div style="display: flex;">
+
+        <div  style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
+            
+    <p  style="color: rgb(73, 72, 71);"><strong>Paso 6:</strong> Tercera iteración</p>
+<p  style="color: rgb(113, 115, 60); text-align: center;">\[
+Resuido = \underline{1010}
+\]
+\[
+p = \phantom{10}1101
+\]</p>
+        </div>
+
+        <div>
+        <p style="color: rgb(73, 72, 71);"><strong>Paso 6:</strong> tercera Operación XOR (bit a bit)</p>
+            <p style="color: rgb(113, 115, 60);">
+            \[
+            1 \oplus 1 = 0
+            \]
+            \[
+            0 \oplus 1 = 1
+            \]
+            \[
+            1 \oplus 0 = 1
+            \]
+            \[
+            0 \oplus 1 = 0
+            \]
+        </p>
+        </div>
+
+    </div>
+
+
+    
+</section>
+
+
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">Paso 3: Ejecución</h2>
+    <p style="color: rgb(73, 72, 71);" ><strong>Resultado del XOR:</strong></p>
+<p style="color: rgb(113, 115, 60);">
+\[
+1001000\oplus 1101 = 101
+\]
+</p>
+</section>
+
+
+
+
 <!-- Diapositiva 7: Paso 4: Obtención del Residuo -->
 <section data-auto-animate>
     <h2 style="color: rgb(113, 115, 60);">Paso 4: Obtención del Residuo</h2>
-    <p style="color: rgb(73, 72, 71);">El residuo obtenido al final de la división binaria se convierte en el código de CRC.</p>
+    <p style="color: rgb(73, 72, 71);">El residuo obtenido al final se convierte en el código de CRC.</p>
     <ul style="color: rgb(113, 115, 60);">
         <li>Ejemplo: Si el residuo es <code>101</code>, este será el CRC.</li>
     </ul>
@@ -61,6 +219,57 @@
     <ul style="color: rgb(113, 115, 60);">
         <li>Mensaje transmitido = Mensaje original + CRC</li>
     </ul>
+</section>
+ 
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">EJEMPLO 2</h2>
+    <p style="color: rgb(73, 72, 71);">
+        Un flujo de bits \( 1101011011 \) se transmite con CRC.  <br>El polinomio generador es \( x^4 + x + 1 \). <br>¿Cuál es la cadena de bits real transmitida?
+    </p>
+</section>
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">EJEMPLO 2</h2>
+
+    <ul style="color: rgb(73, 72, 71);">
+        <li>El polinomio generador \( G(x) = x^4 + x + 1 \) se codifica como \( 10011 \).</li>
+        <li>Claramente, el polinomio generador consta de 5 bits. </li>
+        <li>Por lo tanto, se añade una cadena de 4 ceros al flujo de bits que se va a transmitir.</li>
+        <li>El flujo de bits resultante es \( 11010110110000 \).</li>
+    </ul>
+
+</section>
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">EJEMPLO 2</h2>
+
+    <img src="assets\images\ejemplo2.png"  class="r-frame r-stretch"  alt="">
+
+</section>
+
+<section data-auto-animate>
+    <h2 style="color: rgb(113, 115, 60);">EJEMPLO 2</h2>
+
+    <div style="display: flex; flex-direction: row-reverse;">
+
+        <div style="display: flex; flex-shrink: 2; flex-direction: column; align-content: center;">
+            <p style="color: rgb(73, 72, 71);">A partir de aquí, CRC = 1110.</p>
+            <ul  style="color: rgb(73, 72, 71); font-size: 30px; text-align: center;">
+                <li style="color: rgb(113, 115, 60); margin-top: 20px;">La palabra de código que se va a transmitir se obtiene reemplazando los últimos 4 ceros de 
+                    11010110110000 con el CRC.</li>
+                    <li style="margin-top: 30px;">
+                        Por lo tanto, la palabra de código transmitida al receptor es <br>
+                        <b>11010110111110</b>
+                        
+                    </li>
+            </ul>
+        </div>
+        <div style="display: flex ;flex-shrink: 0; flex-direction: row;">
+            <img src="assets\images\ejemplo2.png"  class="r-frame " style="height: 484px; width: 434px;" alt="">
+        </div>
+
+    </div>
+
+    
+
 </section>
 
 <!-- Diapositiva 9: Verificación en el Receptor -->
