@@ -1,0 +1,349 @@
+<section>
+
+    <hr>
+
+    <h1>Triggers </h1>
+
+    <hr>
+</section>
+
+<!-- Agenda -->
+
+
+<!-- Definición de Triggers -->
+<section>
+    <h2>Definición de Triggers</h2>
+    <ul>
+        <li><strong>¿Qué es un Trigger?</strong>
+            <ul>
+                <li>Un <strong>trigger</strong> es un conjunto de instrucciones SQL que se ejecuta automáticamente en respuesta a ciertos eventos en una tabla específica.</li>
+            </ul>
+        </li>
+        <li><strong>Características Clave:</strong>
+            <ul>
+                <li><strong>Automatización:</strong> Se ejecutan sin intervención manual.</li>
+                <li><strong>Reacción a Eventos:</strong> Se disparan ante operaciones como INSERT, UPDATE o DELETE.</li>
+                <li><strong>Asociación a Tablas:</strong> Vinculados a una tabla específica y a un evento particular.</li>
+                <li><strong>Contexto de Ejecución:</strong> Pueden ejecutarse <strong>ANTES</strong> o <strong>DESPUÉS</strong> del evento.</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+<!-- Propiedades de los Triggers -->
+<section>
+    <h2>Propiedades de los Triggers</h2>
+</section>
+    <section>
+        <h3>1. Automatización de Tareas</h3>
+        <ul>
+            <li><strong>Ejecutan automáticamente</strong> acciones predeterminadas cuando ocurre un evento específico.</li>
+            <li><strong>Ejemplos de Automatización:</strong>
+                <ul>
+                    <li>Actualizar campos de auditoría (fecha de modificación).</li>
+                    <li>Validar datos antes de insertarlos.</li>
+                    <li>Sincronizar tablas relacionadas.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>2. Mantenimiento de la Integridad de Datos</h3>
+        <ul>
+            <li><strong>Aseguran reglas de negocio</strong> y restricciones adicionales más allá de las restricciones de la base de datos.</li>
+            <li><strong>Ejemplos:</strong>
+                <ul>
+                    <li>Impedir que ciertos valores sean insertados.</li>
+                    <li>Mantener sumas o conteos consistentes.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>3. Auditoría y Registro</h3>
+        <ul>
+            <li><strong>Registran cambios</strong> en las tablas para propósitos de auditoría.</li>
+            <li><strong>Ejemplos:</strong>
+                <ul>
+                    <li>Guardar historiales de cambios.</li>
+                    <li>Monitorizar actividades de los usuarios.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>4. Abstracción de la Lógica de Negocio</h3>
+        <ul>
+            <li><strong>Encapsulan la lógica</strong> dentro de la base de datos, reduciendo la necesidad de lógica en la capa de aplicación.</li>
+            <li><strong>Beneficios:</strong>
+                <ul>
+                    <li>Centralización de reglas de negocio.</li>
+                    <li>Consistencia en diferentes aplicaciones que acceden a la base de datos.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Sintaxis de Comandos para Triggers</h2>
+        </section>
+        <section>
+            <h3>1. Crear un Trigger</h3>
+            <pre><code class="language-sql">CREATE TRIGGER nombre_trigger
+{ BEFORE | AFTER } { INSERT | UPDATE | DELETE }
+ON nombre_tabla
+FOR EACH ROW
+BEGIN
+-- Instrucciones SQL
+END;</code></pre>
+            <ul style="font-size: 30px;">
+                <li><code>CREATE TRIGGER</code>: Inicia la creación de un trigger.</li>
+                <li><code>nombre_trigger</code>: Nombre asignado al trigger.</li>
+                <li><code>BEFORE | AFTER</code>: Momento en que se ejecuta el trigger respecto al evento.</li>
+                <li><code>INSERT | UPDATE | DELETE</code>: Evento que dispara el trigger.</li>
+                <li><code>ON nombre_tabla</code>: Tabla a la que está asociado el trigger.</li>
+                <li><code>FOR EACH ROW</code>: Indica que el trigger se ejecuta para cada fila afectada por el evento.</li>
+                <li><code>BEGIN ... END</code>: Bloque de instrucciones SQL que se ejecutan.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>2. Eliminar un Trigger</h3>
+            <pre><code class="language-sql">DROP TRIGGER [IF EXISTS] nombre_trigger;</code></pre>
+            <ul>
+                <li><code>DROP TRIGGER</code>: Elimina un trigger existente.</li>
+                <li><code>IF EXISTS</code>: Opcional. Evita errores si el trigger no existe.</li>
+                <li><code>nombre_trigger</code>: Nombre del trigger a eliminar.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>3. Consultar Información de Triggers</h3>
+            <pre><code class="language-sql">SHOW TRIGGERS [FROM nombre_base_de_datos];</code></pre>
+            <ul>
+                <li><code>SHOW TRIGGERS</code>: Muestra una lista de triggers existentes.</li>
+                <li><code>FROM nombre_base_de_datos</code>: Opcional. Especifica la base de datos de la cual se muestran los triggers.</li>
+            </ul>
+        </section>
+    
+
+    <!-- Tipos de Triggers -->
+    <section>
+        <h2>Tipos de Triggers</h2>
+        </section>
+        <section>
+            <h3>1. Según el Momento de Ejecución</h3>
+            <ul>
+                <li><strong>BEFORE (Antes):</strong>
+                    <ul>
+                        <li>Se ejecutan antes de que ocurra el evento (INSERT, UPDATE, DELETE).</li>
+                        <li>Útiles para validar o modificar datos antes de que sean almacenados.</li>
+                    </ul>
+                </li>
+                <li><strong>AFTER (Después):</strong>
+                    <ul>
+                        <li>Se ejecutan después de que el evento ha ocurrido.</li>
+                        <li>Ideales para acciones que dependen de que el evento haya finalizado.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>2. Según el Tipo de Evento</h3>
+            <ul>
+                <li><strong>INSERT:</strong>
+                    <ul>
+                        <li>Se disparan cuando se inserta una nueva fila en una tabla.</li>
+                    </ul>
+                </li>
+                <li><strong>UPDATE:</strong>
+                    <ul>
+                        <li>Se disparan cuando se actualiza una fila existente en una tabla.</li>
+                    </ul>
+                </li>
+                <li><strong>DELETE:</strong>
+                    <ul>
+                        <li>Se disparan cuando se elimina una fila de una tabla.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h3>3. Según la Acción Permitida</h3>
+            <ul>
+                <li><strong>Triggers de Solo Lectura:</strong>
+                    <ul>
+                        <li>Realizan operaciones que no modifican datos en la base de datos.</li>
+                    </ul>
+                </li>
+                <li><strong>Triggers Modificadores:</strong>
+                    <ul>
+                        <li>Pueden insertar, actualizar o eliminar datos en la base de datos.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    
+
+    <!-- Usos Comunes de los Triggers -->
+    <section>
+        <h2>Usos Comunes de los Triggers</h2>
+    </section>
+    
+        <section>
+            <h3>1. Mantenimiento de la Integridad de Datos</h3>
+            <ul>
+                <li><strong>Ejemplo:</strong> Asegurar que el saldo de una cuenta nunca sea negativo.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>2. Auditoría y Registro de Cambios</h3>
+            <ul>
+                <li><strong>Ejemplo:</strong> Registrar cada actualización realizada en una tabla de empleados.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>3. Automatización de Tareas Administrativas</h3>
+            <ul>
+                <li><strong>Ejemplo:</strong> Actualizar automáticamente la fecha de modificación cada vez que se actualiza un registro.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>4. Validación de Datos</h3>
+            <ul>
+                <li><strong>Ejemplo:</strong> Verificar que ciertos campos cumplan con criterios específicos antes de insertar o actualizar datos.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>5. Sincronización de Tablas Relacionadas</h3>
+            <ul>
+                <li><strong>Ejemplo:</strong> Actualizar una tabla de resumen cada vez que se inserta una nueva venta en la tabla de ventas.</li>
+            </ul>
+        </section>
+    
+
+    <!-- Ejemplos Prácticos -->
+    <section>
+        <h2>Ejemplos Prácticos</h2>
+    </section>
+        <section>
+            <h3>Ejemplo 1: Trigger Antes de Insertar</h3>
+            <p><strong>Descripción:</strong> Asegurar que el campo <code>email</code> de un nuevo usuario sea único.</p>
+            <pre><code class="language-sql">DELIMITER $$
+
+CREATE TRIGGER antes_insertar_usuario
+BEFORE INSERT ON usuarios
+FOR EACH ROW
+BEGIN
+IF EXISTS (SELECT 1 FROM usuarios WHERE email = NEW.email) THEN
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: El email ya existe.';
+END IF;
+END$$
+
+DELIMITER ;</code></pre>
+
+</section>
+
+<section>
+            <p><strong>Explicación:</strong></p>
+            <ul>
+                <li><strong>Momento:</strong> BEFORE INSERT</li>
+                <li><strong>Acción:</strong> Verifica si el email ya existe. Si es así, lanza un error y evita la inserción.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Ejemplo 2: Trigger Después de Actualizar</h3>
+            <p><strong>Descripción:</strong> Registrar en una tabla de auditoría cada vez que se actualiza el salario de un empleado.</p>
+            <pre><code class="language-sql">DELIMITER $$
+
+CREATE TRIGGER despues_actualizar_salario
+AFTER UPDATE ON empleados
+FOR EACH ROW
+BEGIN
+IF OLD.salario <> NEW.salario THEN
+INSERT INTO auditoria_salarios (
+    empleado_id,
+    salario_anterior,
+    salario_nuevo,
+    fecha_cambio
+) VALUES (
+    OLD.id,
+    OLD.salario,
+    NEW.salario,
+    NOW()
+);
+END IF;
+END$$
+
+DELIMITER ;</code></pre>
+</section>
+<section>
+    
+            <p><strong>Explicación:</strong></p>
+            <ul>
+                <li><strong>Momento:</strong> AFTER UPDATE</li>
+                <li><strong>Acción:</strong> Si el salario ha cambiado, inserta un registro en <code>auditoria_salarios</code> con los detalles del cambio.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Ejemplo 3: Trigger Antes de Eliminar</h3>
+            <p><strong>Descripción:</strong> Prevenir la eliminación de un empleado si está asociado a proyectos activos.</p>
+            <pre><code class="language-sql">DELIMITER $$
+
+CREATE TRIGGER antes_eliminar_empleado
+BEFORE DELETE ON empleados
+FOR EACH ROW
+BEGIN
+IF EXISTS (SELECT 1 FROM proyectos WHERE empleado_id = OLD.id AND estado = 'activo') THEN
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: No se puede eliminar al empleado porque tiene proyectos activos.';
+END IF;
+END$$
+
+DELIMITER ;</code></pre>
+</section>
+
+<section>
+    
+            <p><strong>Explicación:</strong></p>
+            <ul>
+                <li><strong>Momento:</strong> BEFORE DELETE</li>
+                <li><strong>Acción:</strong> Verifica si el empleado tiene proyectos activos. Si es así, lanza un error y evita la eliminación.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Ejemplo 4: Trigger para Auditoría</h3>
+            <p><strong>Descripción:</strong> Registrar todas las inserciones en la tabla de ventas en una tabla de auditoría.</p>
+            <pre><code class="language-sql">DELIMITER $$
+
+CREATE TRIGGER despues_insertar_venta
+AFTER INSERT ON ventas
+FOR EACH ROW
+BEGIN
+INSERT INTO auditoria_ventas (
+venta_id,
+cliente_id,
+monto,
+fecha_venta,
+fecha_auditoria
+) VALUES (
+NEW.id,
+NEW.cliente_id,
+NEW.monto,
+NEW.fecha_venta,
+NOW()
+);
+END$$
+
+DELIMITER ;</code></pre>
+</section>
+
+<section>
+    
+            <p><strong>Explicación:</strong></p>
+            <ul>
+                <li><strong>Momento:</strong> AFTER INSERT</li>
+                <li><strong>Acción:</strong> Inserta un registro en <code>auditoria_ventas</code> con los detalles de la venta recién realizada.</li>
+            </ul>
+        </section>
+    
+
+    <!-- Consideraciones de Rendimiento -->
+   
