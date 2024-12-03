@@ -206,3 +206,107 @@
         </div>
     
     </section>
+
+
+    <section data-auto-animate="">
+        <h1 style="font-size: 113px;">Aislamiento de <br> Transacciones</h1>
+    </section>
+    
+    <section data-auto-animate="">
+        <h1 style="font-size: 60px;">Aislamiento de <br> Transacciones</h1>
+
+        <p>MariaDB soporta diferentes <strong>niveles de aislamiento</strong>. </p>
+        <p> Determinan cómo las transacciones interactúan con las demás transacciones.</p>
+        <div style="margin-top: -10px;">
+            <img style="height: 300px; width: 300px;"  src="assets\transaction\isolation.png" alt="">
+        </div>
+    </section>
+    
+    
+
+
+    <section data-auto-animate="">
+        
+        
+        
+
+            <div style="display: flex; flex-direction: column; justify-content: space-around; ">
+                <h1 style="font-size: 60px ; margin-bottom: 60px;">Aislamiento de <br> Transacciones</h1>
+
+
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    
+                    <div>
+                        <h4>1. READ UNCOMMITTED</h4>
+                        <ul style="font-size: 30px; margin-left: 45px;">
+                            <li style="margin-top: 30px ;">Permite leer datos de transacciones no confirmadas.</li>
+                            <li style="margin-top: 30px ;"> Lecturas sucias, no repetibles y fantasmas.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4>2. READ COMMITTED</h4>
+                        <ul style="font-size: 30px; margin-left: 45px;">
+                            <li style="margin-top: 30px ;">Solo permite leer datos de transacciones confirmadas.</li>
+                            <li style="margin-top: 30px ;">Lecturas no repetibles y fantasmas.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+           
+
+        </section>
+        
+
+
+        <section data-auto-animate="">
+        
+        
+
+            <div style="display: flex; flex-direction: column; justify-content: space-around; ">
+                <h1 style="font-size: 60px ; margin-bottom: 60px;">Aislamiento de <br> Transacciones</h1>
+
+
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    
+                    <div>
+                        <h4>3. REPEATABLE READ</h4>
+                        <ul style="font-size: 30px; margin-left: 45px;">
+                            <li style="margin-top: 30px ;">Garantiza que lo leído durante una transacción sea lo mismo al leer en el futuro.</li>
+                            <li style="margin-top: 30px ;"> Posibles lecturas fantasma</li>
+                            <li style="margin-top: 30px ;"> Predeterminado en InnoDB</li>
+                            
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4>4. SERIALIZABLE</h4>
+                        <ul style="font-size: 30px; margin-left: 45px;">
+                            <li style="margin-top: 30px ;">Máximo nivel de aislamiento.</li>
+                            <li style="margin-top: 30px ;">Las transacciones se ejecutan secuencialmente.</li>
+                            <li style="margin-top: 30px ;">Evita las desventajas anteriores</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+           
+
+        </section>
+
+
+      
+        
+      
+    
+
+        
+    

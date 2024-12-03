@@ -7,9 +7,30 @@
 </section>
 
 
+<section data-auto-animate="">
+    <h1 style="font-size: 60px;">Comandos</h1>
+    <h2 style="font-size: 40px;">Configuración del Nivel de Aislamiento</h2>
+
+    <h3>A nivel de sesión</h3>
+    <pre><code class="language-sql">SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;</code></pre>
+</section>
+
+<!-- A nivel global -->
+<section data-auto-animate="">
+
+    <h1 style="font-size: 60px;">Comandos</h1>
+    <h2 style="font-size: 40px;">Configuración del Nivel de Aislamiento</h2>
+
+
+    <h3>A nivel global</h3>
+    <pre><code class="language-sql">SET GLOBAL TRANSACTION ISOLATION LEVEL SERIALIZABLE;</code></pre>
+</section>
 
 <section data-auto-animate="">
     <h1 style="font-size: 60px;">Comandos</h1>
+
+    <h2 style="font-size: 40px;">Para una transacción</h2>
+
     <ul>
         <li><strong>Iniciar una transacción</strong>:
             <pre><code class="language-sql">START TRANSACTION;</code></pre>
@@ -22,3 +43,183 @@
         </li>
     </ul>
 </section>
+
+
+<section data-auto-animate="">
+    <h1 style="font-size: 60px;">Comandos</h1>
+
+    <h2 style="font-size: 40px;">Para una transacción</h2>
+
+    <ul>
+        <li><strong>Puntos de guardado </strong>:
+            <pre><code class="language-sql">SAVEPOINT nombre_punto;</code></pre>
+        </li>
+        <li><strong>Revertir a un punto de guardado</strong>:
+            <pre><code class="language-sql">ROLLBACK TO SAVEPOINT nombre_punto;</code></pre>
+        </li>
+        <li><strong>Liberar un punto de guardado</strong>:
+            <pre><code class="language-sql">RELEASE SAVEPOINT nombre_punto;</code></pre>
+        </li>
+    </ul>
+</section>
+
+<section data-auto-animate="">
+    <h1 style="font-size: 60px;">Comandos</h1>
+
+    <h2 style="font-size: 40px;">Para una transacción</h2>
+
+    <ul>
+        <li><strong>Desactivar el autocommit </strong>:
+            <pre><code class="language-sql">SET AUTOCOMMIT = 0;</code></pre>
+        </li>
+        <li><strong>Activar el autocommit</strong>:
+            <pre><code class="language-sql">SET AUTOCOMMIT = 1;</code></pre>
+        </li>
+        <li><strong>Liberar un punto de guardado</strong>:
+            <pre><code class="language-sql">RELEASE SAVEPOINT nombre_punto;</code></pre>
+        </li>
+    </ul>
+</section>
+
+
+<section data-auto-animate="">
+    <h1 style="font-size: 60px;">Comandos</h1>
+
+    <h2 style="font-size: 40px;">Para una transacción</h2>
+
+    <ul>
+        <li><strong>Bloquear una tabla a nivel lectura </strong>:
+            <pre><code class="language-sql">LOCK TABLES empleados READ;
+            </code></pre>
+        </li>
+        <li><strong>Bloquear una tabla a niivel escritura</strong>:
+            <pre><code class="language-sql">LOCK TABLES empleados WRITE;
+            </code></pre>
+        </li>
+        <li><strong>Desbloquear</strong>:
+            <pre><code class="language-sql">UNLOCK TABLES;
+            </code></pre>
+        </li>
+    </ul>
+</section>
+
+
+<section data-auto-animate="">
+    
+    <h1  style="font-size: 160px;"> EJEMPLO </h1>
+    
+
+</section>
+
+<section data-auto-animate="">
+    <h1 style="font-size: 60px;">EJEMPLO</h1>
+    <p style="font-size: 40px;">Básico</p>
+
+    <pre><code class="language-sql">START TRANSACTION;
+
+        UPDATE cuentas SET saldo = saldo - 500 WHERE id = 1;
+        UPDATE cuentas SET saldo = saldo + 500 WHERE id = 2;
+        
+        -- Verificar que ambos updates fueron exitosos
+        IF ROW_COUNT() = 1 THEN
+          COMMIT;
+        ELSE
+          ROLLBACK;
+        END IF;</code></pre>
+</section>
+
+<section data-auto-animate="">
+    <h1 style="font-size: 60px;">EJEMPLO</h1>
+    <p style="font-size: 40px;">Con SAVEPOINT</p>
+    
+    <pre><code class="language-sql">
+        START TRANSACTION;
+
+        SAVEPOINT inicio_transferencia;
+        
+        UPDATE cuentas SET saldo = saldo - 500 WHERE id = 1;
+        
+        -- Supongamos que aquí ocurre un error
+        IF error_ocurre THEN
+          ROLLBACK TO SAVEPOINT inicio_transferencia;
+        ELSE
+          UPDATE cuentas SET saldo = saldo + 500 WHERE id = 2;
+          COMMIT;
+        END IF;
+    </code></pre>
+</section>
+
+
+<section>
+    <h2>Ejemplo de Problema de Concurrencia</h2>
+</section>
+
+
+                <!-- Transacción A -->
+                <section>
+                    <h3>Transacción A</h3>
+                    <pre><code class="language-sql">
+START TRANSACTION;
+SELECT saldo FROM cuentas WHERE id = 1;
+-- saldo = 1000
+                    </code></pre>
+                </section>
+                <!-- Transacción B -->
+                <section>
+                    <h3>Transacción B</h3>
+                    <pre><code class="language-sql">
+START TRANSACTION;
+UPDATE cuentas SET saldo = saldo - 100 WHERE id = 1;
+COMMIT;
+                    </code></pre>
+                </section>
+                <!-- Continuación Transacción A -->
+                <section>
+                    <h3>Transacción A </h3>
+                    <p>(continuación)</p>
+                    <pre><code class="language-sql">
+SELECT saldo FROM cuentas WHERE id = 1;
+-- saldo = 900 (lectura no repetible)
+COMMIT;
+                    </code></pre>
+                    <p><em>Transacción A obtiene diferentes resultados para la misma consulta debido a la intervención de <br> Transacción B.</em></p>
+                </section>
+
+
+
+
+
+<section>
+    <h1>Bloqueos y Deadlocks</h1>
+</section>
+<!-- Bloqueos y Deadlocks -->
+    <!-- Bloqueos (Locks) -->
+    <section>
+        <h2>Bloqueos (Locks)</h2>
+        <ul>
+            <li>Las transacciones pueden bloquear filas o tablas para evitar conflictos.</li>
+            <li><strong>Tipos:</strong>
+                <ul>
+                    <li><strong>Bloqueos compartidos</strong>: Permiten lectura pero no escritura.</li>
+                    <li><strong>Bloqueos exclusivos</strong>: Impiden que otras transacciones lean o escriban.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <!-- Deadlocks -->
+    <section>
+        <h2>Deadlocks</h2>
+        <ul>
+            <li>Ocurren cuando dos o más transacciones esperan indefinidamente por recursos bloqueados entre sí.</li>
+            <li><strong>Prevención:</strong>
+                <ul>
+                    <li>Acceder a los recursos en el mismo orden.</li>
+                    <li>Mantener transacciones cortas.</li>
+                    <li>Usar niveles de aislamiento adecuados.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+
+ 
