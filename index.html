@@ -4,11 +4,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>MEDIOS DE TRANSMISION</title>
+		<title>TBD 1#</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/theme/blood.css">
 		<link rel="stylesheet" href="plugin/pointer/pointer.css" />
 		<link rel="stylesheet" href="plugin/drawer/drawer.css" />
 
@@ -16,13 +16,6 @@
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 		
 
-		<style>
-			ul {
-				font-size: 30px; /* Tamaño de letra más pequeño */
-				margin: 0px;
-			}
-
-		</style>
 		
 		
 
@@ -36,123 +29,13 @@
 
 				<section data-external-replace="Presentation/cover.html"></section>
 				
-				<!-- 2.3 -->
-				<section data-auto-animate>
-					<h1 class=" r-fit-text"style="color: rgb(113, 115, 60);">
-						2.3 Métodos para la detección <br> y correción de errores
-					</h1>
-				</section>
+				<!-- Índice -->
 				
 				<section data-external-replace="Presentation/contents.html"></section>
 
-				<section data-external-replace="Presentation/error_concept/error_concept.html"></section>
+				<!-- Transacciones -->
 				
-				<section data-external-replace="Presentation/minimum_distance/minimum_distance.html"></section>
-
-				<section data-external-replace="Presentation\error_detection_mechanism\error_detection_mechanism.html"></section>
-
-				<section data-external-replace="Presentation\parity_applied_to_ VRC_and_LRC_code\parity_applied_to_VRC_and_LRC_code.html"></section>
-				
-				<section data-auto-animate>
-					<h1 class=" r-fit-text"style="color: rgb(113, 115, 60);">
-						Recapitulando
-					</h1>
-				</section>
-
-				<section>
-					<section data-auto-animate>
-						<p style="color: rgb(73, 72, 71);">LRC, VRC, Checksum, CRC y Código Hamming</p>
-					</section>
-			
-					<!-- Diapositiva 2: LRC -->
-					<section data-auto-animate>
-						<h2 style="color: rgb(113, 115, 60);">LRC (Chequeo de Redundancia Longitudinal)</h2>
-						<ul style="color: rgb(113, 115, 60);">
-							<li>Consiste en añadir un bit de paridad extra (o varios) al final de cada unidad de datos.</li>
-							<li>El bit de paridad se calcula según la paridad longitudinal de los bits en la unidad de datos.</li>
-							<li>Se utiliza para detectar errores de un solo bit y algunos tipos de errores en ráfaga.</li>
-						</ul>
-					</section>
-			
-					<!-- Diapositiva 3: VRC -->
-					<section data-auto-animate>
-						<h2 style="color: rgb(113, 115, 60);">VRC (Chequeo de Redundancia Vertical)</h2>
-						<ul style="color: rgb(113, 115, 60);">
-							<li>Involucra añadir un bit de paridad para cada posición de bit en un grupo de unidades de datos.</li>
-							<li>Cada bit de paridad se calcula basado en los bits en la misma posición a través de las unidades de datos.</li>
-							<li>Se utiliza para detectar errores en bits individuales dentro de una unidad de datos.</li>
-						</ul>
-					</section>
-			
-					<!-- Diapositiva 4: Checksum -->
-					<section data-auto-animate>
-						<h2 style="color: rgb(113, 115, 60);">Checksum (Suma de Comprobación)</h2>
-						<ul style="color: rgb(113, 115, 60);">
-							<li>Es un valor calculado a partir del contenido de una unidad de datos (p. ej., un mensaje) usando un algoritmo matemático.</li>
-							<li>El checksum se añade a la unidad de datos y se transmite junto con ella.</li>
-							<li>En el receptor, se recalcula el checksum y, si coincide con el recibido, se considera que los datos están libres de errores.</li>
-							<li>Comúnmente utilizado en protocolos de red y de transferencia de archivos para la detección de errores.</li>
-						</ul>
-					</section>
-			
-					<!-- Diapositiva 5: CRC -->
-					<section data-auto-animate>
-						<h2 style="color: rgb(113, 115, 60);">CRC (Chequeo de Redundancia Cíclica)</h2>
-						<ul style="color: rgb(113, 115, 60);">
-							<li>Técnica avanzada de detección de errores que genera un checksum basado en la división polinómica binaria de los datos por un polinomio generador predefinido.</li>
-							<li>El residuo de esta operación de división se convierte en el valor CRC.</li>
-							<li>Ampliamente utilizado en sistemas de comunicación digital, incluyendo redes Ethernet, conexiones USB y dispositivos de almacenamiento.</li>
-						</ul>
-					</section>
-			
-					<!-- Diapositiva 6: Código Hamming -->
-					<section data-auto-animate>
-						<h2 style="color: rgb(113, 115, 60);">Código Hamming</h2>
-						<ul style="color: rgb(113, 115, 60);">
-							<li>Código de detección y corrección de errores que agrega bits de paridad adicionales a una unidad de datos.</li>
-							<li>El número de bits de paridad se determina en función de la distancia de Hamming entre los bits de datos.</li>
-							<li>Permite detectar y corregir errores de un solo bit y ciertos errores de múltiples bits, útil en sistemas críticos como la memoria de computadoras.</li>
-						</ul>
-					</section>
-			
-					<!-- Diapositiva 7: Comparación de Métodos -->
-					<section data-auto-animate>
-						<h2 style="color: rgb(113, 115, 60);">Comparación de Métodos</h2>
-						<table style="width:100%; color: rgb(73, 72, 71); font-size: 20px;">
-							<tr>
-								<th>Método</th>
-								<th>Tipo de Error Detectado</th>
-								<th>Capacidad de Corrección</th>
-							</tr>
-							<tr>
-								<td>LRC</td>
-								<td>Errores de un solo bit y algunos errores en ráfaga</td>
-								<td>No</td>
-							</tr>
-							<tr>
-								<td>VRC</td>
-								<td>Errores en bits individuales</td>
-								<td>No</td>
-							</tr>
-							<tr>
-								<td>Checksum</td>
-								<td>Errores en el contenido completo del mensaje</td>
-								<td>No</td>
-							</tr>
-							<tr>
-								<td>CRC</td>
-								<td>Errores de múltiples bits y errores en ráfaga</td>
-								<td>No (solo detección)</td>
-							</tr>
-							<tr>
-								<td>Código Hamming</td>
-								<td>Errores de un solo bit y ciertos errores múltiples</td>
-								<td>Sí (corrige errores de un solo bit)</td>
-							</tr>
-						</table>
-					</section>
-				</section>
-
+				<section data-external-replace="Presentation/transactions/tr.html"></section>
 				
 				
 
