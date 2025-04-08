@@ -1,0 +1,88 @@
+<section data-auto-animate="">
+    
+        <h1  style="font-size: 137px;"> Ejemplo Básico  </h1>
+        
+    
+    </section>
+    
+    <!-- Definición -->
+    <section data-auto-animate>
+        <div style="display: flex; flex-direction: column;">
+            <h1  style="font-size: 60px;"> Ejemplo Básico </h1>
+
+
+                <p style="font-size: 30px; "> El siguiente ejemplo usa <br></p>
+                <p style="font-size: 30px; "> <strong>INT <em>10h</em></strong> subfunción <strong><em>0Eh</em></strong></p>
+                <p class="fragment" style="font-size: 30px; color: aquamarine; "> Imprime un char en pantalla, avanza el cursor. </p>
+
+            </div>
+    
+           
+            
+        </div>
+    
+    </section>
+
+
+       <!-- Definición -->
+       <section data-auto-animate>
+        <div style="display: flex; flex-direction: column;">
+            <h1  style="font-size: 60px;"> Ejemplo Básico </h1>
+
+
+                <p style="font-size: 15px; margin-top: -10px; "> El siguiente ejemplo usa <br></p>
+                <p style="font-size: 15px; margin-top: -10px; "> <strong>INT <em>10h</em></strong> subfunción <strong><em>0Eh</em></strong></p>
+                <p  style="font-size: 15px; color: aquamarine;  margin-top: -10px; "> Imprime un char en pantalla, avanza el cursor. </p>
+
+                <pre><code data-trim data-noescape>
+                    ORG    100h	
+
+                        ; The sub-function that we are using
+                        ; does not modify the AH register on
+                        ; return, so we may set it only once.
+
+                        MOV    AH, 0Eh    ; select sub-function.
+
+                        ; INT 10h / 0Eh sub-function
+                        ; receives an ASCII code of the
+                        ; character that will be printed
+                        ; in AL register.
+
+                        MOV    AL, 'H'    ; ASCII code: 72
+                        INT    10h        ; print it!
+
+                        MOV    AL, 'e'    ; ASCII code: 101
+                        INT    10h        ; print it!
+
+                        MOV    AL, 'l'    ; ASCII code: 108
+                        INT    10h        ; print it!
+
+                        MOV    AL, 'l'    ; ASCII code: 108
+                        INT    10h        ; print it!
+
+                        MOV    AL, 'o'    ; ASCII code: 111
+                        INT    10h        ; print it!
+
+                        MOV    AL, '!'    ; ASCII code: 33
+                        INT    10h        ; print it!
+
+                        RET               ; returns to operating system.
+                </code></pre>
+
+            </div>
+    
+           
+            
+        </div>
+    
+    </section>
+ 
+
+
+      
+        
+      
+    
+
+        
+    

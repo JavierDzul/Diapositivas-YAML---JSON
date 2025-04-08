@@ -1,0 +1,98 @@
+<section data-auto-animate="">
+    <hr>
+    <h1 style="font-size: 110px">Interrupciones</h1>
+    <hr>
+</section>
+
+<!-- Agenda -->
+
+
+<!-- Definición de Vistas -->
+<section data-auto-animate>
+    <h1 style="font-size: 90px;">Interrupciones</h1>
+    <ul>
+        <li><strong>¿Cuántas son?</strong>
+            <ul>
+                <li style="font-size: 80px; color: red;">Muchas.</li>
+                <li class="fragment">Varían entre sistemas</li>
+            </ul>
+        </li>
+       <p class="fragment" style="font-size: 30px;"> A continuación un listado de las compatibles con el x8086</p>
+    </ul>
+</section>
+
+<!-- Propiedades de las Vistas -->
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 0</strong></p>
+
+    <p style="color: greenyellow;"><em>-> Establece el modo de video <-</em></p>
+
+    <p style="text-align: center; margin-bottom: -15px;">Input:</p>
+    <ul style="margin-top: -15px; margin-bottom: 30px;">
+        <li style="color: aquamarine; font-size: 30px; margin-top: -20px;">AL = Modo de video deseado</li>
+    </ul>
+
+    
+
+    <div>
+
+        <ul>
+            <li style="color: whitesmoke; font-size: 20px;">00h = Modo texto 40x25 - 16 colores 8 páginas</li>
+            <li style="color: whitesmoke; font-size: 20px;">03h = Modo texto 80x25 - 16 colores 8 páginas</li>
+            <li style="color: whitesmoke; font-size: 20px;">13h = Modo gráfico 40 x 25 - 256 colores 320x200 pixeles 1 página</li>
+            
+        </ul>
+    </div>
+    <p style="text-align: center; margin-top: -5px;">Ejemplo:</p>
+    <pre><code data-trim data-noescape >
+        mov al, 13h
+        mov ah, 0
+        int 10h
+    </code></pre>
+
+</section>
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 01h</strong></p>
+
+    <p style="color: greenyellow;"><em>-> Establece el modo de texto con cursor <-</em></p>
+
+    <p style="text-align: center; margin-bottom: 0px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">CH = linea de inicio del cursor (0-4 bits) y opciones (bits 5-7)</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">CL = línea de fin para el cursor (0-4 bits) </li>
+        <p style="font-size: 20px;">Si el bit 5 de CH esta en <strong>0</strong> el cursor es visible, si es <strong>1</strong>, no lo es.</p>
+    </ul>
+
+    
+    <p style="text-align: center; margin-top: -45px;">Ejemplo:</p>
+    <pre><code data-trim data-noescape >
+; hide blinking text cursor: 
+     	mov ch, 32
+     	mov ah, 1
+     	int 10h
+
+; show standard blinking text cursor: 
+     	mov ch, 6
+     	mov cl, 7
+     	mov ah, 1
+     	int 10h
+
+; show box-shaped blinking text cursor: 
+     	mov ch, 0
+     	mov cl, 7
+     	mov ah, 1
+     	int 10h
+
+;     	note: some bioses required CL to be >=7,
+;     	otherwise wrong cursor shapes are displayed. 
+    </code></pre>
+
+</section>
+
+

@@ -1,0 +1,164 @@
+<section>
+
+    <hr>
+
+    <h1>Código </h1>
+
+    <hr>
+</section>
+
+<!-- Agenda -->
+
+
+<!-- Definición de Triggers -->
+<section>
+    <pre>
+        <code data-trim data-noescape>
+            org 100h  ; .COM program
+
+.model small
+.stack 100h
+
+.data
+menu db '1. Line',13,10
+     db '2. Rectangle',13,10
+     db '3. Triangle',13,10
+     db '4. Clear',13,10
+     db '5. Exit',13,10, '$'
+
+.code
+
+
+start:
+    call SetVideoMode13h
+mainloop:
+    call ShowMenu
+    call WaitKey
+    cmp al, '1'
+    je DrawLine
+    cmp al, '2'
+    je DrawRect
+    cmp al, '3'
+    je DrawTriangle
+    cmp al, '4'
+    je ClearScreen
+    cmp al, '5'
+    je ExitProgram
+    jmp mainloop
+
+DrawLine:
+    ; draw horizontal line from (50,50) to (150,50)
+    mov cx, 50
+.next_pixel:
+    cmp cx, 150
+    ja .done
+    mov dx, 50
+    call PutPixel
+    inc cx
+    jmp .next_pixel
+.done:
+    jmp mainloop
+
+DrawRect:
+    ; top line
+    mov cx, 100
+.draw_top:
+    cmp cx, 200
+    ja .sides1
+    mov dx, 60
+    call PutPixel
+    inc cx
+    jmp .draw_top
+
+.sides1:
+    mov cx, 100
+.sides_loop:
+    cmp cx, 200
+    ja .bottom
+    mov dx, 100
+    call PutPixel
+    mov dx, 60
+    call PutPixel
+    inc cx
+    jmp .sides_loop
+
+.bottom:
+    mov cx, 100
+.draw_bottom:
+    cmp cx, 200
+    ja .done2
+    mov dx, 100
+    call PutPixel
+    inc cx
+    jmp .draw_bottom
+.done2:
+    jmp mainloop
+
+DrawTriangle:
+    ; just a simple slanted triangle
+    mov cx, 0
+.tri_loop:
+    cmp cx, 50
+    ja .tri_done
+    mov dx, 50
+    add dx, cx
+    call PutPixel
+    mov dx, 50
+    sub dx, cx
+    call PutPixel
+    mov dx, 50
+    call PutPixel
+    inc cx
+    jmp .tri_loop
+.tri_done:
+    jmp mainloop
+
+ClearScreen:
+    call SetVideoMode13h
+    jmp mainloop
+
+ShowMenu:
+    mov ah, 09h
+    lea dx, menu
+    int 21h
+    ret
+
+WaitKey:
+    mov ah, 00h
+    int 16h
+    ret
+
+PutPixel:
+    ; input: CX = X, DX = Y
+    ; uses: AL = color (default = 15)
+    push ax
+    push bx
+    push cx
+    push dx
+    mov al, 15
+    mov ah, 0Ch
+    mov bh, 0
+    int 10h
+    pop dx
+    pop cx
+    pop bx
+    pop ax
+    ret
+
+SetVideoMode13h:
+    mov ah, 0
+    mov al, 13h
+    int 10h
+    ret
+
+ExitProgram:
+    ; set text mode before exit
+    mov ax, 0003h
+    int 10h
+    mov ah, 4Ch
+    int 21h
+end start
+
+        </code>
+    </pre>
+</section>
