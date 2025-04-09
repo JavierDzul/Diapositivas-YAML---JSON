@@ -13,7 +13,7 @@
     <ul>
         <li><strong>¿Cuántas son?</strong>
             <ul>
-                <li style="font-size: 80px; color: red;">Muchas.</li>
+                <li class="fragment" style="font-size: 80px; color: red;">Muchas.</li>
                 <li class="fragment">Varían entre sistemas</li>
             </ul>
         </li>
@@ -60,7 +60,7 @@
     <h1 style="font-size: 60px;">Interrupciones</h1>
     <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 01h</strong></p>
 
-    <p style="color: greenyellow;"><em>-> Establece el modo de texto con cursor <-</em></p>
+    <p style="color: greenyellow;"><em>-> Establece la forma del cursor en modo de texto <-</em></p>
 
     <p style="text-align: center; margin-bottom: 0px;">Input:</p>
     <ul style="margin-top: 0px; margin-bottom: 30px;">
@@ -92,6 +92,329 @@
 ;     	note: some bioses required CL to be >=7,
 ;     	otherwise wrong cursor shapes are displayed. 
     </code></pre>
+
+</section>
+
+
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 02h</strong></p>
+
+    <p style="color: greenyellow;"><em>-> Establece la posición del cursor <-</em></p>
+
+    <p style="text-align: center; margin-bottom: 0px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">DH = fila.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">DL = columna.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">BH = número de página (0..7).</li>
+    </ul>
+
+    
+    <p style="text-align: center; margin-top: -25px;">Ejemplo:</p>
+    <pre><code data-trim data-noescape >
+        mov dh, 10
+        mov dl, 20
+        mov bh, 0
+        mov ah, 2
+        int 10h
+    </code></pre>
+
+</section>
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 03h</strong></p>
+
+    <p style="color: greenyellow;"><em>-> Devuelve la posición y tamaño del cursor <-</em></p>
+
+    <p style="text-align: center; margin-bottom: 0px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">BH = número de página.</li>
+    </ul>
+
+    
+    <p style="text-align: center; margin-top: -25px;">Devuelve:</p>
+    <pre><code data-trim data-noescape >
+        DH = fila.
+        DL = columna.
+        CH = Linea de inicio del cursor.
+        CL = Linea de fin del cursor.
+    </code></pre>
+
+</section>
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 05h</strong></p>
+
+    <p style="color: greenyellow;"><em>-> Selecciona la página de video a activar <-</em></p>
+
+    <p style="text-align: center; margin-bottom: 0px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">AL = número de página nuevo (0...7).</li>
+        <p style="font-size: 20px;">La página activada es mostrada </p>
+    </ul>
+
+
+</section>
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 06h</strong></p>
+    <p style="color: greenyellow;"><em>-> Scroll up en la ventana. <-</em></p>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 07h</strong></p>
+    <p style="color: greenyellow;"><em>-> Scroll down en la ventana. <-</em></p>
+
+
+    <p style="text-align: center; margin-bottom: 0px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">AL = número de lineas a scrollear (00h = limpiar la ventana entera).</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">BH = Atributo usado para escribir lineas al final de la ventana.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">CH, CL = fila, columna de la esquina superior izquierda de la ventana.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">DH, DL = fila, columna de la esquina inferior derecha de la ventana.</li>
+        
+    </ul>
+
+
+</section>
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 08h</strong></p>
+    <div style="display: flex; flex-direction: row;">
+        <div>
+
+            <p style="color: greenyellow; text-align: start; width: max-content;"><em>-> </em></p>
+        </div>
+        
+        <div style="display: flex; width: auto;">
+            <p style="color: greenyellow; text-align: center;"><em>Lee el character y su atributo en la posición del cursor.</em></p>
+        </div>
+
+        <div>
+
+            <p style="color: greenyellow; text-align: end;"><em> <-</em></p>
+        </div>
+    </div>
+    
+
+
+    <p style="text-align: center; margin-bottom: 0px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">BH = número de página.</li>
+        
+        
+    </ul>
+
+    
+    <p style="text-align: center; margin-top: -25px;">Devuelve:</p>
+    <pre><code data-trim data-noescape >
+        AH = attributo.
+        DL = char.
+    </code></pre>
+
+</section>
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 09h</strong></p>
+    
+
+
+    <div style="display: flex; flex-direction: row;">
+        <div>
+
+            <p style="color: greenyellow; text-align: start; width: max-content;"><em>-> </em></p>
+        </div>
+        
+        <div style="display: flex; width: auto;">
+            <p style="color: greenyellow;"><em>Escribe un carácter y su atributo en la posicion del cursor.</em></p>
+        </div>
+
+        <div>
+
+            <p style="color: greenyellow; text-align: end;"><em> <-</em></p>
+        </div>
+    </div>
+
+
+
+    <p style="text-align: center; margin-bottom: 0px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">AL = Carácter a mostrar.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">BH = número de página.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">BL = <em>atributo</em>.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">CX = Número de veces a escribir el carácter.</li>
+        
+        
+    </ul>
+
+</section>
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 0Ah</strong></p>
+    
+
+
+    <div style="display: flex; flex-direction: row;">
+        <div>
+
+            <p style="color: greenyellow; text-align: start; width: max-content;"><em>-> </em></p>
+        </div>
+        
+        <div style="display: flex; width: auto;">
+            <p style="color: greenyellow;"><em>Escribe <strong>ÚNICAMENTE</strong> el carácter en la posición del cursor.</em></p>
+        </div>
+
+        <div>
+
+            <p style="color: greenyellow; text-align: end;"><em> <-</em></p>
+        </div>
+    </div>
+
+
+    <p style="text-align: center; margin-bottom: 0px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">AL = Carácter a mostrar.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">BH = Número de página.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">CX = Número de veces a escribir el carácter.</li>
+        
+        
+    </ul>
+
+</section>
+
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 0Ch</strong></p>
+    <div style="display: flex; flex-direction: row; justify-content: center;">
+        <div>
+
+            <p style="color: greenyellow; text-align: start; width: max-content;"><em>-> </em></p>
+        </div>
+        
+        <div style="display: flex; width: auto; margin-left: 20px; margin-right: 20px;">
+            <p style="color: greenyellow; text-align: center;"><em>Cambia el color de un único pixel</em></p>
+        </div>
+
+        <div>
+
+            <p style="color: greenyellow; text-align: end;"><em> <-</em></p>
+        </div>
+    </div>
+
+
+    <p style="text-align: center; margin-bottom: 0px; margin-top: -15px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">AL = Color del pixel.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">CX = Columna.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">DX = Fila.</li>
+        
+        
+    </ul>
+
+    
+    <p style="text-align: center; margin-top: -25px;">Ejemplo:</p>
+    <pre><code data-trim data-noescape >
+
+        mov al, 13h
+        mov ah, 0
+        int 10h     ; set graphics video mode. 
+        mov al, 1100b
+        mov cx, 10
+        mov dx, 20
+        mov ah, 0ch
+        int 10h     ; set pixel. 
+    </code></pre>
+
+</section>
+
+
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>INT 10h / AH = 0Dh</strong></p>
+    <div style="display: flex; flex-direction: row; justify-content: center;">
+        <div>
+
+            <p style="color: greenyellow; text-align: start; width: max-content;"><em>-> </em></p>
+        </div>
+        
+        <div style="display: flex; width: auto; margin-left: 20px; margin-right: 20px;">
+            <p style="color: greenyellow; text-align: center;"><em>Obtiene el color de un solo pixel</em></p>
+        </div>
+
+        <div>
+
+            <p style="color: greenyellow; text-align: end;"><em> <-</em></p>
+        </div>
+    </div>
+
+
+    <p style="text-align: center; margin-bottom: 0px; margin-top: -15px;">Input:</p>
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">CX = Columna.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">DX = Fila.</li>
+        
+        
+    </ul>
+
+    
+    <p style="text-align: center; margin-top: -25px;">Regresa:</p>
+    <pre><code data-trim data-noescape >
+        
+       AL = Color del pixel.
+    </code></pre>
+
+</section>
+
+<section data-auto-animate>
+    <h1 style="font-size: 60px;">Interrupciones</h1>
+    <p style="color: aquamarine; font-size: 40px;"><strong>Y muchas más</strong></p>
+    <div style="display: flex; flex-direction: row; justify-content: center;">
+        
+        
+        <div style="display: flex; width: auto; margin-left: 20px; margin-right: 20px;">
+            <p style="color: greenyellow; text-align: center;">Por lo general de la BIOS:</p>
+        </div>
+
+    </div>
+
+
+    <ul style="margin-top: 0px; margin-bottom: 30px;">
+        
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 10h = Interrupciones de BIOS (generalmente de software).</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 11h = Lista de equipo de la BIOS.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 12h = Obtiene el tamaño de la memoria.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 13h = Interrupciones para discos de almacenamiento.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 15h / AH = 86h  = Pausa a la BIOS.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 16h = Interrupciones para verificar teclas presionadas (keystrokes).</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 19h = Rebootea el sistema.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 1Ah = Obtiene la hora del sistema.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 20h = Sale hacia el SO.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 21h = Interrupciones del MS-DOS.</li>
+        <li style="color: aquamarine; font-size: 30px; margin-top: 0px;">INT 33h = Interrupciones del mouse.</li>
+        
+        
+        
+    </ul>
+
+
 
 </section>
 
