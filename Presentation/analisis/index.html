@@ -1,0 +1,193 @@
+<section data-auto-animate>
+    <hr>
+    <h2 data-id="title" style="font-size: 8rem;">Etapas del <br> Analisis</h2>
+    <hr>
+
+</section>
+
+
+<section data-auto-animate >
+    <h2 style="font-size: 5rem;" data-id="title">Etapas del Analisis</h2>
+    <div style="display: flex; flex-direction: column;">
+        
+       
+        <div>
+           <p>
+               El proceso sigue las siguientes etapas:
+           </p>
+        </div>
+
+
+        
+        
+    </div>
+
+</section>
+
+<section data-auto-animate >
+    <h2 style="font-size: 5rem;" data-id="title">Etapas del analisis</h2>
+    <div style="display: flex; flex-direction: column;">
+        
+       
+        <div>
+           <p>
+               El proceso sigue las siguientes etapas:
+           </p>
+        </div>
+
+<ol>
+    <li><strong>Análisis léxico:</strong> Identificación de tokens (claves, valores, indentación)</li>
+    <li><strong>Análisis sintáctico:</strong> Construcción de estructuras de datos (listas, diccionarios)</li>
+    <li><strong>Análisis semántico:</strong> Validación del contenido y estructura antes de la conversión</li>
+  </ol>
+        
+        
+    </div>
+
+</section>
+
+
+<section data-auto-animate>
+    <h2 style="font-size: 2rem;" data-id="title">lexico.py</h2>
+    <pre style=" font-size: 1rem; max-height: 70vh; overflow: auto; margin: 0; padding: 1.5rem; background: #222; border-radius: 10px;">
+<code class="language-python" style="white-space: pre; display: block;">
+def obtener_tokens_yaml(yaml_string):
+    tokens = []
+    lines = yaml_string.splitlines()
+    indent_stack = [0]  
+
+    for line_number, line in enumerate(lines, 1):
+        if not line.strip():  
+            continue
+
+        stripped = line.lstrip()
+        indent = len(line) - len(stripped)
+
+        
+        if indent > indent_stack[-1]:
+            tokens.append(('INCREMENTO', indent))
+            indent_stack.append(indent)
+        while indent < indent_stack[-1]:
+            indent_stack.pop()
+            tokens.append(('DECREMENTO', indent))
+
+        
+        if ':' in stripped:
+            key, value = stripped.split(':', 1)
+            tokens.append(('CLAVE', key.strip()))
+            if value.strip():
+                tokens.append(('VALOR', value.strip()))
+        else:
+            tokens.append(('VALOR', stripped))
+
+        tokens.append(('SALTO DE LINEA', None))
+
+    
+    while len(indent_stack) > 1:
+        indent_stack.pop()
+        tokens.append(('DECREMENTO', indent_stack[-1]))
+
+    return tokens
+
+</code>
+    </pre>
+</section>
+
+
+<section data-auto-animate>
+    <h2 style="font-size: 2rem;" data-id="title">parser.py</h2>
+    <pre style="font-size: 1rem; max-height: 70vh; overflow: auto; margin: 0; padding: 1.5rem; background: #222; border-radius: 10px;">
+<code class="language-python" style="white-space: pre; display: block;">
+def estructurar_tokens(tokens):
+    def parsear_tokens(pos):
+        result = {}
+        key = None
+
+        while pos < len(tokens):
+            token_type, token_value = tokens[pos]
+
+
+            if token_type == 'DECREMENTO':
+                pos += 1
+                break
+
+            elif token_type == 'CLAVE':
+                key = token_value
+                pos += 1
+
+                
+                if pos < len(tokens) and tokens[pos][0] == 'VALOR':
+                    result[key] = tokens[pos][1]
+                    pos += 1
+
+                
+                elif pos < len(tokens) and tokens[pos][0] == 'SALTO DE LINEA':
+                    pos += 1
+                    if pos < len(tokens) and tokens[pos][0] == 'INCREMENTO':
+                        pos += 1
+                        nested_block, pos = parsear_tokens(pos)
+                        result[key] = nested_block
+
+            elif token_type == 'SALTO DE LINEA':
+                pos += 1
+
+            else:
+                pos += 1
+
+        return result, pos
+
+    diccionario_estructurado, _ = parsear_tokens(0)
+    return diccionario_estructurado
+
+
+</code>
+    </pre>
+</section>
+
+<section data-auto-animate>
+    <h2 style="font-size: 2rem;" data-id="title">serializador.py</h2>
+    <pre style="font-size: 1rem; max-height: 70vh; overflow: auto; margin: 0; padding: 1.5rem; background: #222; border-radius: 10px;">
+<code class="language-python" style="white-space: pre; display: block;">
+import json
+
+def dict_a_json(data):
+    return json.dumps(data, indent=2)
+
+def dict_a_yaml(data, indent=0):
+    yaml = ""
+    for key, value in data.items():
+        if isinstance(value, dict):
+            yaml += " " * indent + f"{key}:\n"
+            yaml += dict_a_yaml(value, indent + 2)
+        else:
+            yaml += " " * indent + f"{key}: {value}\n"
+    return yaml
+
+</code>
+    </pre>
+</section>
+
+
+<section data-auto-animate>
+    <h2 style="font-size: 2rem;" data-id="title">gui.py</h2>
+    <pre style=" font-size: 1rem; max-height: 70vh; overflow: auto; margin: 0; padding: 1.5rem; background: #222; border-radius: 10px;">
+<code class="language-python" style="white-space: pre; display: block;">
+def pasar_yaml_a_json(texto_input):
+    try:
+        tokens = obtener_tokens_yaml(texto_input)
+        version_parseada = estructurar_tokens(tokens)
+        return dict_a_json(version_parseada), tokens
+    except Exception as e:
+        return f"Error al intentar convertir el YAML a JSON: {e}"
+
+def convert_json_to_yaml(input_text):
+    try:
+        data = json.loads(input_text)
+        return dict_a_yaml(data), data
+    except json.JSONDecodeError as e:
+        return f"Error al intentar convertir el JSON a YAML: {e}"
+
+
+</code>
+    </pre>
+</section>
